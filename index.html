@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Message for My Sister</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #fbc2eb;
+            --secondary: #a6c1ee;
+            --text-color: #5a5a5a;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .sister-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            display: block;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #8e44ad;
+            margin: 10px 0;
+        }
+
+        h2 {
+            font-weight: 400;
+            color: #34495e;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards 0.5s;
+        }
+
+        .message {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards 1.5s;
+        }
+
+        .btn {
+            background: linear-gradient(to right, #8e44ad, #c39bd3);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.4s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(142, 68, 173, 0.3);
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 5s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <span class="sister-icon">✨💜✨</span>
+        <h1 id="greeting">Assalam-o-Alaikum!</h1>
+        <h2 id="name-display">My Dearest Sister</h2>
+        <p class="message">
+            Just wanted to send a little sparkle your way today. <br>
+            <strong>How are you doing?</strong> <br>
+            Hope your day is as bright and wonderful as your smile!
+        </p>
+        <button class="btn" onclick="sisterConfetti()">Click for Love</button>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const name = urlParams.get('name');
+            if(name) {
+                document.getElementById('name-display').innerText = "To my sister, " + name;
+            }
+            
+            for(let i=0; i<20; i++) {
+                let sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + 'vw';
+                sparkle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                sparkle.style.animationDelay = Math.random() * 5 + 's';
+                document.body.appendChild(sparkle);
+            }
+        };
+
+        function sisterConfetti() {
+            var count = 200;
+            var defaults = { origin: { y: 0.7 } };
+
+            function fire(particleRatio, opts) {
+                confetti(Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio)
+                }));
+            }
+
+            fire(0.25, { spread: 26, startVelocity: 55, colors: ['#fbc2eb', '#ffffff'] });
+            fire(0.2, { spread: 60, colors: ['#a6c1ee', '#8e44ad'] });
+            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+        }
+    </script>
+</body>
+</html>
